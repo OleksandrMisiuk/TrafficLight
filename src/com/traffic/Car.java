@@ -4,7 +4,7 @@ public class Car extends Vehicle {
 
     // Default Constructor
     public Car() {
-        super(5
+        super(8
 //                , false
         );
     }

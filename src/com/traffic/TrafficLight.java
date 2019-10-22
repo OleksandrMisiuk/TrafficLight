@@ -24,6 +24,11 @@ public class TrafficLight {
     private int time = 10;
     private int EWTIME = 30;
     private int NSTIME = 20;
+
+    private int eCarsPassed = 0;
+    private int nCarsPassed = 0;
+    private int wCarsPassed = 0;
+    private int sCarsPassed = 0;
     // Get Vehicle
     private Vehicle getVehicleFromInt(int vtype) {
         Vehicle tempVehicle = null;
@@ -77,6 +82,11 @@ public class TrafficLight {
         System.out.printf("%9s | %1s : %1s | %9s %n", "", south.get(7).toString(), north.get(2).toString(), "");
         System.out.printf("%9s | %1s : %1s | %9s %n", "", south.get(8).toString(), north.get(1).toString(), "");
         System.out.printf("%9s | %1s : %1s | %9s %n", "", south.get(9).toString(), north.get(0).toString(), "");
+        System.out.println("East cars passed : " + eCarsPassed);
+        System.out.println("West cars passed : " + wCarsPassed);
+        System.out.println("South cars passed : " + sCarsPassed);
+        System.out.println("North cars passed : " + nCarsPassed);
+        System.out.println();
     }
 
     private void addVehicle(String direction
@@ -273,6 +283,7 @@ public class TrafficLight {
         west.set(8, west.get(7));
         west.set(7, west.get(6));
         west.set(6, west.get(5));
+
         if(ns_flow) {
 
             // If car in intersections time is 0 then cycle
@@ -416,6 +427,10 @@ public class TrafficLight {
                 ns_flow = false;
                 ew_flow = true;
                 time = EWTIME;
+                eCarsPassed = 0;
+                wCarsPassed = 0;
+                sCarsPassed = 0;
+                nCarsPassed = 0;
             }
             if(north.get(0).getTime() == 0) {
                 addVehicle("n"
@@ -453,6 +468,10 @@ public class TrafficLight {
                 ns_flow = true;
                 ew_flow = false;
                 time = NSTIME;
+                eCarsPassed = 0;
+                wCarsPassed = 0;
+                sCarsPassed = 0;
+                nCarsPassed = 0;
             }
             if(east.get(0).getTime() == 0) {
                 addVehicle("e"
@@ -464,6 +483,19 @@ public class TrafficLight {
 //                        , true
                 );
             }
+        }
+
+        if(!east.get(5).toString().equals(" ")){
+            eCarsPassed++;
+        }
+        if(!west.get(5).toString().equals(" ")){
+            wCarsPassed++;
+        }
+        if(!north.get(5).toString().equals(" ")){
+            nCarsPassed++;
+        }
+        if(!south.get(5).toString().equals(" ")){
+            sCarsPassed++;
         }
 
         if(noVehiclesLeft()) {

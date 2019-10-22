@@ -4,7 +4,7 @@ public class Semi extends Vehicle {
 
     // Default Constructor
     public Semi() {
-        super(7
+        super(10
 //                , false
         );
     }
